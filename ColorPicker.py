@@ -1,5 +1,5 @@
-import uvicorn
 import io
+import uvicorn
 import numpy as np
 import requests
 from PIL import Image
@@ -42,8 +42,8 @@ def get_dominant_color(image_url: str) -> Tuple[int, int, int]:
     dominant_color = kmeans.cluster_centers_[np.argmax(np.bincount(kmeans.labels_))]
 
     # Post-process the result
-    dominant_color_rgb = tuple((dominant_color * 255).astype(int))
-
+    # dominant_color_rgb = tuple((dominant_color * 255).astype(int))
+    dominant_color_rgb = tuple(map(int, dominant_color * 255))
     return dominant_color_rgb
 
 @app.get("/dominant-color")
